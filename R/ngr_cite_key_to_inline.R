@@ -143,7 +143,6 @@ ngr_cite_assemble <- function(citations) {
 #' @family cite
 #' @return A tibble with citation keys and their formatted inline references.
 #' @importFrom RefManageR ReadBib
-#' @importFrom tibble tibble
 #' @importFrom chk chk_character chk_string chk_flag
 #' @export
 #' @examples
@@ -165,10 +164,12 @@ ngr_cite_key_to_inline <- function(citation_keys, bib_file, key_abort_on_missing
     ngr_cite_format(key, bib_obj, key_abort_on_missing = key_abort_on_missing)
   })
 
-  # Create a tibble to store citation keys and their formatted references
-  result <- tibble::tibble(
+  # Create a data.frame to store citation keys and their formatted references
+  result <- data.frame(
     citation_key = citation_keys,
-    reference_inline = reference_list
+    reference_inline = reference_list,
+    stringsAsFactors = FALSE,
+    row.names = NULL
   )
 
   return(result)
