@@ -6,7 +6,7 @@
 ![Experimental](https://img.shields.io/badge/status-experimental-orange)
 ![Haywire](https://img.shields.io/badge/status-haywire-red)
 
-The goal of ngr is to …
+The goal of ngr is to put functions in one place
 
 ## Installation
 
