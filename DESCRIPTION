@@ -17,4 +17,5 @@ Imports:
     RefManageR,
     chk,
     processx,
-    cli
+    cli,
+    fs
