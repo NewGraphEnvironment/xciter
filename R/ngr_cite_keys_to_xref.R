@@ -132,7 +132,8 @@ ngr_cite_assemble <- function(citations) {
   }
 }
 
-#' Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.,
+#' We probably just want to use \link{ngr_cite_keys_table_col}  or \link{ngr_cite_keys_to_inline} but this will
+#' Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.
 #'
 #' This function takes citation keys passed as a list and generates inline APA-style references for each item of the list.
 #' @param citation_keys A character vector of citation keys.
