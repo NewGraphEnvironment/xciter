@@ -25,6 +25,7 @@ Formats a single citation key into inline text without brackets.
 Other cite: 
 \code{\link{ngr_cite_assemble}()},
 \code{\link{ngr_cite_format}()},
+\code{\link{ngr_cite_keys_table_col}()},
 \code{\link{ngr_cite_keys_to_xref}()}
 }
 \concept{cite}

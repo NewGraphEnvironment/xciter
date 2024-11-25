@@ -23,6 +23,7 @@ Formats one or more citation keys into a single inline reference.
 Other cite: 
 \code{\link{ngr_cite_assemble}()},
 \code{\link{ngr_cite_format_single}()},
+\code{\link{ngr_cite_keys_table_col}()},
 \code{\link{ngr_cite_keys_to_xref}()}
 }
 \concept{cite}

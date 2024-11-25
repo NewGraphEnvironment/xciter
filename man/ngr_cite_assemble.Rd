@@ -19,6 +19,7 @@ Assembles a list of citations into a single inline reference, using semicolons.
 Other cite: 
 \code{\link{ngr_cite_format}()},
 \code{\link{ngr_cite_format_single}()},
+\code{\link{ngr_cite_keys_table_col}()},
 \code{\link{ngr_cite_keys_to_xref}()}
 }
 \concept{cite}

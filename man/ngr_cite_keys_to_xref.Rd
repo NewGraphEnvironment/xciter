@@ -2,7 +2,8 @@
 % Please edit documentation in R/ngr_cite_keys_to_xref.R
 \name{ngr_cite_keys_to_xref}
 \alias{ngr_cite_keys_to_xref}
-\title{Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.,}
+\title{We probably just want to use \link{ngr_cite_keys_table_col}  or \link{ngr_cite_keys_to_inline} but this will
+Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.}
 \usage{
 ngr_cite_keys_to_xref(
   citation_keys,
@@ -38,6 +39,7 @@ ngr_cite_keys_to_xref(citation_keys, bib_file)
 Other cite: 
 \code{\link{ngr_cite_assemble}()},
 \code{\link{ngr_cite_format}()},
-\code{\link{ngr_cite_format_single}()}
+\code{\link{ngr_cite_format_single}()},
+\code{\link{ngr_cite_keys_table_col}()}
 }
 \concept{cite}
