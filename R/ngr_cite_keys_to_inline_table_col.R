@@ -2,13 +2,14 @@
 #'
 #' This function applies the \link{ngr_cite_keys_to_inline} transformation to a specified column
 #' in a data frame. It validates the inputs, checks that the specified column exists in the
-#' data frame, and replaces its contents with the transformed values.
+#' data frame, and replaces citation keys with inline citations.
 #'
 #' @param dat A data frame containing the column to transform.
 #' @param col_format A string specifying the name of the column to transform.
 #' @param path_bib A file path to the bibliography file (`.bib`) used for citation keys.
 #'   Defaults to `"references.bib"` in the current working directory.
 #' @return A data frame with the specified column transformed.
+#' @rdname ngr_cite_keys_to_inline
 #' @family cite
 #' @importFrom chk chk_data chk_string
 #' @importFrom cli cli_abort

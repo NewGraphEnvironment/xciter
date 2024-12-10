@@ -132,8 +132,11 @@ ngr_cite_assemble <- function(citations) {
   }
 }
 
-#' We probably just want to use \link{ngr_cite_keys_table_col}  or \link{ngr_cite_keys_to_inline} but this will
 #' Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.
+#'
+#' We probably just want to use [ngr_cite_keys_to_inline()] or [ngr_cite_keys_to_inline_table_col()]but this will
+#' This function requires the `RefManageR` package. If it is not installed, you can install it with
+#' `install.packages("RefManageR")`.
 #'
 #' This function takes citation keys passed as a list and generates inline APA-style references for each item of the list.
 #' @param citation_keys A character vector of citation keys.
@@ -145,6 +148,8 @@ ngr_cite_assemble <- function(citations) {
 #' @return A data frame with citation keys in one column and their formatted inline references in another.
 #' @importFrom RefManageR ReadBib
 #' @importFrom chk chk_character chk_string chk_flag
+#' @importFrom cli cli_abort
+#' @seealso [ngr_cite_keys_to_inline()], [ngr_cite_keys_to_inline_table_col()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -157,6 +162,10 @@ ngr_cite_keys_to_xref <- function(citation_keys, path_bib, key_abort_on_missing 
   chk::chk_string(path_bib)
   chk::chk_file(path_bib)
   chk::chk_flag(key_abort_on_missing)
+
+  if (!requireNamespace("RefManageR", quietly = TRUE)) {
+    cli::abort("The 'RefManageR' package is required for this function but is not installed. Please install it using install.packages('RefManageR').")
+  }
 
   # Read the bibliography file
   bib_obj <- RefManageR::ReadBib(path_bib, check = key_check_response)

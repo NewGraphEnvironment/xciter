@@ -13,7 +13,8 @@ ngr_cite_bib_keys_extract(path_bib)
 ngr_cite_keys_guess_match(keys_missing, keys_bib)
 }
 \arguments{
-\item{path_bib}{A string specifying the path to the bibliography file (e.g., \code{references.bib}).}
+\item{path_bib}{A file path to the bibliography file (\code{.bib}) used for citation keys.
+Defaults to \code{"references.bib"} in the current working directory.}
 
 \item{keys}{\link{character} A vector of citation keys to check for in the BibTeX file.}
 }
@@ -45,7 +46,7 @@ Other cite:
 \code{\link{ngr_cite_format}()},
 \code{\link{ngr_cite_format_single}()},
 \code{\link{ngr_cite_keys_extract}()},
-\code{\link{ngr_cite_keys_to_inline_table_col}()},
+\code{\link{ngr_cite_keys_to_inline}()},
 \code{\link{ngr_cite_keys_to_xref}()}
 }
 \concept{cite}

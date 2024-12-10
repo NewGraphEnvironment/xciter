@@ -2,8 +2,7 @@
 % Please edit documentation in R/ngr_cite_keys_to_xref.R
 \name{ngr_cite_keys_to_xref}
 \alias{ngr_cite_keys_to_xref}
-\title{We probably just want to use \link{ngr_cite_keys_table_col}  or \link{ngr_cite_keys_to_inline} but this will
-Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.}
+\title{Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.}
 \usage{
 ngr_cite_keys_to_xref(
   citation_keys,
@@ -26,6 +25,11 @@ ngr_cite_keys_to_xref(
 A data frame with citation keys in one column and their formatted inline references in another.
 }
 \description{
+We probably just want to use \code{\link[=ngr_cite_keys_to_inline]{ngr_cite_keys_to_inline()}} or \code{\link[=ngr_cite_keys_to_inline_table_col]{ngr_cite_keys_to_inline_table_col()}}but this will
+This function requires the \code{RefManageR} package. If it is not installed, you can install it with
+\code{install.packages("RefManageR")}.
+}
+\details{
 This function takes citation keys passed as a list and generates inline APA-style references for each item of the list.
 }
 \examples{
@@ -36,12 +40,14 @@ ngr_cite_keys_to_xref(citation_keys, path_bib)
 }
 }
 \seealso{
+\code{\link[=ngr_cite_keys_to_inline]{ngr_cite_keys_to_inline()}}, \code{\link[=ngr_cite_keys_to_inline_table_col]{ngr_cite_keys_to_inline_table_col()}}
+
 Other cite: 
 \code{\link{ngr_cite_assemble}()},
 \code{\link{ngr_cite_bib_keys_missing}()},
 \code{\link{ngr_cite_format}()},
 \code{\link{ngr_cite_format_single}()},
 \code{\link{ngr_cite_keys_extract}()},
-\code{\link{ngr_cite_keys_to_inline_table_col}()}
+\code{\link{ngr_cite_keys_to_inline}()}
 }
 \concept{cite}
