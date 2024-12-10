@@ -22,8 +22,10 @@ Formats one or more citation keys into a single inline reference.
 \seealso{
 Other cite: 
 \code{\link{ngr_cite_assemble}()},
+\code{\link{ngr_cite_bib_keys_missing}()},
 \code{\link{ngr_cite_format_single}()},
-\code{\link{ngr_cite_keys_table_col}()},
+\code{\link{ngr_cite_keys_extract}()},
+\code{\link{ngr_cite_keys_to_inline_table_col}()},
 \code{\link{ngr_cite_keys_to_xref}()}
 }
 \concept{cite}

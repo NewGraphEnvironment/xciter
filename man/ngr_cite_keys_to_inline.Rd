@@ -4,12 +4,12 @@
 \alias{ngr_cite_keys_to_inline}
 \title{Convert Citation Keys to Inline References}
 \usage{
-ngr_cite_keys_to_inline(text, bib_file, csl_file = NULL)
+ngr_cite_keys_to_inline(text, path_bib, csl_file = NULL)
 }
 \arguments{
 \item{text}{A character vector containing text with citation keys (e.g., \verb{@doe2020}).}
 
-\item{bib_file}{A string specifying the path to the bibliography file (e.g., \code{references.bib}).}
+\item{path_bib}{A string specifying the path to the bibliography file (e.g., \code{references.bib}).}
 
 \item{csl_file}{A string specifying the path to the CSL file (e.g., \code{apa.csl}). Default is \code{NULL},
 which uses Pandoc's default citation style.}

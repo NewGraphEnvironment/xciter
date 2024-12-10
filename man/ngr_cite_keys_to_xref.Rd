@@ -7,7 +7,7 @@ Generate Cross-reference Data Frame with Original Keys in One Column and Inline 
 \usage{
 ngr_cite_keys_to_xref(
   citation_keys,
-  bib_file,
+  path_bib,
   key_abort_on_missing = TRUE,
   key_check_response = "warn"
 )
@@ -15,7 +15,7 @@ ngr_cite_keys_to_xref(
 \arguments{
 \item{citation_keys}{A character vector of citation keys.}
 
-\item{bib_file}{Path to the .bib bibliography file.}
+\item{path_bib}{Path to the .bib bibliography file.}
 
 \item{key_abort_on_missing}{Logical. If TRUE, aborts on missing citation keys.}
 
@@ -30,16 +30,18 @@ This function takes citation keys passed as a list and generates inline APA-styl
 }
 \examples{
 \dontrun{
-bib_file <- "path/to/references.bib"
+path_bib <- "path/to/references.bib"
 citation_keys <- c("@smith2000", "[@smith2001; @doe2005]")
-ngr_cite_keys_to_xref(citation_keys, bib_file)
+ngr_cite_keys_to_xref(citation_keys, path_bib)
 }
 }
 \seealso{
 Other cite: 
 \code{\link{ngr_cite_assemble}()},
+\code{\link{ngr_cite_bib_keys_missing}()},
 \code{\link{ngr_cite_format}()},
 \code{\link{ngr_cite_format_single}()},
-\code{\link{ngr_cite_keys_table_col}()}
+\code{\link{ngr_cite_keys_extract}()},
+\code{\link{ngr_cite_keys_to_inline_table_col}()}
 }
 \concept{cite}
