@@ -12,7 +12,7 @@ RoxygenNote: 7.3.1
 Suggests: 
     RefManageR,
     testthat (>= 3.0.0),
-    stringdist
+    tribble
 Config/testthat/edition: 3
 URL: http://www.newgraphenvironment.com/ngr/
 Imports: 
@@ -20,7 +20,8 @@ Imports:
     processx,
     cli,
     fs,
-    stringr
+    stringr,
+    stringdist
 Depends: 
     R (>= 2.10)
 LazyData: true
