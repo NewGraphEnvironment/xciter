@@ -14,7 +14,8 @@ Suggests:
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
-URL: https://newgraphenvironment.github.io/ngr/
+URL: https://github.com/NewGraphEnvironment/ngr/
+BugReports: https://github.com/NewGraphEnvironment/ngr/issues
 Imports: 
     chk,
     processx,
