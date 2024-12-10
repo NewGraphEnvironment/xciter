@@ -5,14 +5,15 @@
 #' custom bibliography and CSL (Citation Style Language) files.
 #'
 #' @param text A character vector containing text with citation keys (e.g., `@doe2020`).
-#' @param bib_file A string specifying the path to the bibliography file (e.g., `references.bib`).
+#' @param path_bib A string specifying the path to the bibliography file (e.g., `references.bib`).
 #' @param csl_file A string specifying the path to the CSL file (e.g., `apa.csl`). Default is `NULL`,
 #'   which uses Pandoc's default citation style.
 #' @return A character vector with inline references replacing the citation keys.
 #' @importFrom fs file_exists file_delete
+#' @importFrom chk chk_file chk_string
 #' @importFrom processx run
 #' @export
-ngr_cite_keys_to_inline <- function(text, bib_file, csl_file = NULL) {
+ngr_cite_keys_to_inline <- function(text, path_bib, csl_file = NULL) {
   # Check for Pandoc installation
   if (Sys.which("pandoc") == "") {
     stop("Pandoc is not installed or not found in the system PATH. Please install Pandoc.")
@@ -23,10 +24,10 @@ ngr_cite_keys_to_inline <- function(text, bib_file, csl_file = NULL) {
     stop("The `text` parameter must be a non-empty character vector.")
   }
 
-  # Ensure bibliography file exists
-  if (!fs::file_exists(bib_file)) {
-    stop("The specified bibliography file does not exist: ", bib_file)
-  }
+  # Ensure bibliography file passed as string and exists
+  chk::chk_string(path_bib)
+  chk::chk_file(path_bib)
+
 
   # Ensure CSL file exists if provided
   if (!is.null(csl_file) && !fs::file_exists(csl_file)) {
@@ -43,7 +44,7 @@ ngr_cite_keys_to_inline <- function(text, bib_file, csl_file = NULL) {
     input_file,
     "--from", "markdown",
     "--to", "plain",
-    "--bibliography", bib_file,
+    "--bibliography", path_bib,
     "--citeproc",
     "--metadata", "suppress-bibliography=true",
     "-o", output_file
@@ -69,8 +70,9 @@ ngr_cite_keys_to_inline <- function(text, bib_file, csl_file = NULL) {
   # Clean up temporary files
   fs::file_delete(c(input_file, output_file))
 
-  # # Extract only the first line (inline citation)
-  # inline_citation <- output_text[1]
+  # Collapse the output to a single string
+  inline_citation <- paste(output_text, collapse = " ")
 
-  return(output_text)
+  return(inline_citation)
+
 }

@@ -137,7 +137,7 @@ ngr_cite_assemble <- function(citations) {
 #'
 #' This function takes citation keys passed as a list and generates inline APA-style references for each item of the list.
 #' @param citation_keys A character vector of citation keys.
-#' @param bib_file Path to the .bib bibliography file.
+#' @param path_bib Path to the .bib bibliography file.
 #' @param key_abort_on_missing Logical. If TRUE, aborts on missing citation keys.
 #' @param key_check_response Response level for missing fields in bib entries. Default is "warn". Passed to
 #' \code{\link[RefManageR]{ReadBib}} in the RefManageR package
@@ -148,17 +148,18 @@ ngr_cite_assemble <- function(citations) {
 #' @export
 #' @examples
 #' \dontrun{
-#' bib_file <- "path/to/references.bib"
+#' path_bib <- "path/to/references.bib"
 #' citation_keys <- c("@smith2000", "[@smith2001; @doe2005]")
-#' ngr_cite_keys_to_xref(citation_keys, bib_file)
+#' ngr_cite_keys_to_xref(citation_keys, path_bib)
 #' }
-ngr_cite_keys_to_xref <- function(citation_keys, bib_file, key_abort_on_missing = TRUE, key_check_response = "warn") {
+ngr_cite_keys_to_xref <- function(citation_keys, path_bib, key_abort_on_missing = TRUE, key_check_response = "warn") {
   chk::chk_character(citation_keys)
-  chk::chk_string(bib_file)
+  chk::chk_string(path_bib)
+  chk::chk_file(path_bib)
   chk::chk_flag(key_abort_on_missing)
 
   # Read the bibliography file
-  bib_obj <- RefManageR::ReadBib(bib_file, check = key_check_response)
+  bib_obj <- RefManageR::ReadBib(path_bib, check = key_check_response)
 
   # Process each citation key through ngr_cite_format
   reference_list <- sapply(citation_keys, function(key) {
