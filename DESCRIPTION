@@ -11,7 +11,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Suggests: 
     RefManageR,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    stringdist
 Config/testthat/edition: 3
 URL: http://www.newgraphenvironment.com/ngr/
 Imports: 
@@ -19,8 +20,7 @@ Imports:
     processx,
     cli,
     fs,
-    stringr,
-    stringdist
+    stringr
 Depends: 
     R (>= 2.10)
 LazyData: true
