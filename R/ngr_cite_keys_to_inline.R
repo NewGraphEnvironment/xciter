@@ -45,6 +45,7 @@ ngr_cite_keys_to_inline <- function(text, bib_file, csl_file = NULL) {
     "--to", "plain",
     "--bibliography", bib_file,
     "--citeproc",
+    "--metadata", "suppress-bibliography=true",
     "-o", output_file
   )
 
@@ -68,8 +69,8 @@ ngr_cite_keys_to_inline <- function(text, bib_file, csl_file = NULL) {
   # Clean up temporary files
   fs::file_delete(c(input_file, output_file))
 
-  # Extract only the first line (inline citation)
-  inline_citation <- output_text[1]
+  # # Extract only the first line (inline citation)
+  # inline_citation <- output_text[1]
 
-  return(inline_citation)
+  return(output_text)
 }
