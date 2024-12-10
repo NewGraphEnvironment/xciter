@@ -1,6 +1,9 @@
 url: http://www.newgraphenvironment.com/ngr/
 template:
   bootstrap: 5
+  assets:
+    css:
+      - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
 navbar:
   structure:
     left: [home, reference, articles]
