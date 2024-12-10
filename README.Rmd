@@ -18,7 +18,10 @@ knitr::opts_chunk$set(
 ![Experimental](https://img.shields.io/badge/status-experimental-orange)
 ![Haywire](https://img.shields.io/badge/status-haywire-red)
 
-The goal of ngr is to put functions in one place
+Not loveing the name so - `ngr` will soon become `xciter` and focus solely on "extra" functions related to citeing bibliography 
+items such as processing .bib files to get citation keys, processing BiBtex keys to get inline citations, etc.  This work was
+inspired by the need to find a way to process citation keys to inline citation text in DT tables as rendering in rmarkdown does
+not produce the results we desire so we need to do it with manual calls to `pandoc`.
 
 ## Installation
 
@@ -36,5 +39,17 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(ngr)
 ## basic example code
+
+path_bib <- system.file("extdata", "references.bib", package = "ngr")
+dat <- data.frame(
+  id = 1:3,
+  bib_keys = c(
+    "Outside block quotes @busch_etal2011LandscapeLevelModela and in [@woll_etal2017SalmonEcological]",
+    "This is many [@busch_etal2011LandscapeLevelModela; @woll_etal2017SalmonEcological; @kirsch_etal2014Fishinventory]",
+    "this is a failed key @key3"
+  )
+)
+result <- ngr::ngr_cite_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
+print(result)
 ```
 
