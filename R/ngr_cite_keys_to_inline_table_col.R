@@ -6,24 +6,32 @@
 #'
 #' @param dat A data frame containing the column to transform.
 #' @param col_format A string specifying the name of the column to transform.
-#' @param bib_file A file path to the bibliography file (`.bib`) used for citation keys.
+#' @param path_bib A file path to the bibliography file (`.bib`) used for citation keys.
 #'   Defaults to `"references.bib"` in the current working directory.
 #' @return A data frame with the specified column transformed.
 #' @family cite
 #' @importFrom chk chk_data chk_string
 #' @importFrom cli cli_abort
 #' @examples
+#' # Path to a BibTeX file included in the package
+#' path_bib <- system.file("extdata", "references.bib", package = "ngr")
+#'
 #' # Example data frame
-#' df <- data.frame(
+#' dat <- data.frame(
 #'   id = 1:3,
-#'   bib_keys = c("key1", "key2", "key3")
+#'   bib_keys = c(
+#'     "Outside block quotes @busch_etal2011LandscapeLevelModela and in [@woll_etal2017SalmonEcological]",
+#'     "This is many [@busch_etal2011LandscapeLevelModela; @woll_etal2017SalmonEcological; @kirsch_etal2014Fishinventory]",
+#'     "this is a failed key @key3")
 #' )
 #'
-#' # Apply the transformation
-#' result <- ngr_cite_keys_table_col(df, col_format = "bib_keys")
+#' # Process the data frame
+#' result <- ngr_cite_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
+#' result
+#'
 
 #' @export
-ngr_cite_keys_table_col <- function(dat = NULL, col_format = NULL, bib_file = "references.bib") {
+ngr_cite_keys_to_inline_table_col <- function(dat = NULL, col_format = NULL, path_bib = "references.bib") {
   # Validate inputs
   chk::chk_data(dat)
   chk::chk_string(col_format)
@@ -34,6 +42,6 @@ ngr_cite_keys_table_col <- function(dat = NULL, col_format = NULL, bib_file = "r
   }
 
   # Transform the specified column
-  dat[[col_format]] <- sapply(dat[[col_format]], function(x) ngr_cite_keys_to_inline(x, bib_file = bib_file))
+  dat[[col_format]] <- sapply(dat[[col_format]], function(x) ngr_cite_keys_to_inline(x, path_bib = path_bib))
   dat
 }
