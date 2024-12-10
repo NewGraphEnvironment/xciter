@@ -4,14 +4,14 @@
 #' from a given text. Additional citations can also be included via a parameter.
 #'
 #' @param text A character string containing the text to process. Passing `NA` will issue a warning.
-#' @param citations_additional A character vector of additional citations to include. Default is `NULL`.
+#' @param keys_additional A character vector of additional citation keys to include. Default is `NULL`.
 #' @return A character vector of unique citation keys.
 #' @importFrom stringr str_extract_all
 #' @importFrom cli cli_warn
 #' @importFrom chk chk_string chk_character
 #' @family cite
 #' @export
-ngr_cite_keys_extract <- function(text, citations_additional = NULL) {
+ngr_cite_keys_extract <- function(text, keys_additional = NULL) {
   # Validate `text` input
   chk::chk_string(text) # Ensures text is a single string
 
@@ -20,11 +20,11 @@ ngr_cite_keys_extract <- function(text, citations_additional = NULL) {
     text <- ""
   }
 
-  # Validate `citations_additional`
-  if (!is.null(citations_additional)) {
-    chk::chk_character(citations_additional) # Ensures it is a character vector
+  # Validate `keys_additional`
+  if (!is.null(keys_additional)) {
+    chk::chk_character(keys_additional) # Ensures it is a character vector
   } else {
-    citations_additional <- character() # Convert NULL to an empty vector
+    keys_additional <- character() # Convert NULL to an empty vector
   }
 
   # Regular expression to find citations in the text
@@ -33,11 +33,11 @@ ngr_cite_keys_extract <- function(text, citations_additional = NULL) {
   # Extract citations using stringr
   citations <- stringr::str_extract_all(text, citation_pattern)[[1]]
 
-  # Remove the leading '@' from the citations and ensure uniqueness
-  citations <- unique(sub("^@", "", citations))
+  # # Remove the leading '@' from the citations and ensure uniqueness
+  # citations <- unique(sub("^@", "", citations))
 
   # Combine with additional citations and ensure uniqueness
-  all_citations <- unique(c(citations, citations_additional))
+  all_citations <- unique(c(citations, keys_additional))
 
   return(all_citations)
 }
@@ -51,12 +51,14 @@ ngr_cite_keys_extract <- function(text, citations_additional = NULL) {
 #' [ngr_cite_keys_extract()] to format a table column for reporting but we
 #' require the citation keys so that they show up in the references section of the overall report.
 #'
-#' This function builds on /link{ngr_cite_keys_extract}, and integrates its functionality
+#' This function builds on [ngr_cite_keys_extract()], and integrates its functionality
 #' for working with citation keys extracted from a data frame.
 #'
 #' @inheritParams ngr_cite_keys_to_inline_table_col
 #' @param print_rowwise Logical. If `TRUE`, formats and prints keys row-wise with a trailing
 #'   comma for easy YAML compatibility. Defaults to `TRUE`.
+#' @param ... Can be used to pass additional citation keys to  [ngr_cite_keys_extract()] in case there are
+#' citation keys additional to the ones in the table that you want in the output.
 #' @return A character vector of citation keys extracted from a data frame column.
 #' @importFrom chk chk_data chk_string chk_logical
 #' @seealso [ngr_cite_keys_extract()]

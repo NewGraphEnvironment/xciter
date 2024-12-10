@@ -5,14 +5,14 @@
 \alias{ngr_cite_keys_extract_table}
 \title{Extract Citations from Text}
 \usage{
-ngr_cite_keys_extract(text, citations_additional = NULL)
+ngr_cite_keys_extract(text, keys_additional = NULL)
 
 ngr_cite_keys_extract_table(dat, col_format, print_rowwise = TRUE, ...)
 }
 \arguments{
 \item{text}{A character string containing the text to process. Passing \code{NA} will issue a warning.}
 
-\item{citations_additional}{A character vector of additional citations to include. Default is \code{NULL}.}
+\item{keys_additional}{A character vector of additional citation keys to include. Default is \code{NULL}.}
 
 \item{dat}{A data frame containing the column to transform.}
 
@@ -20,6 +20,9 @@ ngr_cite_keys_extract_table(dat, col_format, print_rowwise = TRUE, ...)
 
 \item{print_rowwise}{Logical. If \code{TRUE}, formats and prints keys row-wise with a trailing
 comma for easy YAML compatibility. Defaults to \code{TRUE}.}
+
+\item{...}{Can be used to pass additional citation keys to  \code{\link[=ngr_cite_keys_extract]{ngr_cite_keys_extract()}} in case there are
+citation keys additional to the ones in the table that you want in the output.}
 }
 \value{
 A character vector of unique citation keys.
@@ -37,7 +40,7 @@ into the \code{nocite} line of YAML in an R Markdown document.  This can be hand
 require the citation keys so that they show up in the references section of the overall report.
 }
 \details{
-This function builds on /link{ngr_cite_keys_extract}, and integrates its functionality
+This function builds on \code{\link[=ngr_cite_keys_extract]{ngr_cite_keys_extract()}}, and integrates its functionality
 for working with citation keys extracted from a data frame.
 }
 \seealso{
