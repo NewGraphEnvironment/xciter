@@ -1,4 +1,9 @@
 url: http://www.newgraphenvironment.com/ngr/
 template:
   bootstrap: 5
-
+navbar:
+  structure:
+    left: [home, reference, articles]
+    right: [github]
+  github:
+    url: https://github.com/NewGraphEnvironment/ngr
