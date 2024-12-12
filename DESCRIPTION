@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Allan", "Irvine", , "al@newgraphenvironment.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3495-2128"))
-Description: Functions used in dynamic reporting.
+Description: Citation related functions used in dynamic reporting - particularily within tables where normal rendering does not work.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
