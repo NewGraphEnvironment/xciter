@@ -5,7 +5,7 @@ citation_keys <- c(
   "[@busch_etal2011LandscapeLevelModela; @woll_etal2017SalmonEcological; @kirsch_etal2014Fishinventory]",
   "[@test2001]"
 )
-path_bib <- system.file("extdata", "references.bib", package = "ngr")
+path_bib <- system.file("extdata", "references.bib", package = "xciter")
 if (requireNamespace("RefManageR", quietly = TRUE)) {
   bib_obj <- RefManageR::ReadBib(path_bib, check = "warn")
 } else {

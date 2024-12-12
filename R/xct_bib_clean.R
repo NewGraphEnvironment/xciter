@@ -55,7 +55,7 @@ xct_bib_clean <- function(path_bib, keys, output_file) {
 #'   vector if all citation keys are found.
 #' @examples
 #' \dontrun{
-#' path_bib <- system.file("extdata", "references.bib", package = "ngr")
+#' path_bib <- system.file("extdata", "references.bib", package = "xciter")
 #' citations <- c("Smith2020", "Jones2019")
 #' xct_bib_keys_missing(path_bib, citations)
 #' }

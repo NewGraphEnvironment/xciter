@@ -35,7 +35,7 @@ This function extracts all citation keys from a given BibTeX file.
 }
 \examples{
 \dontrun{
-path_bib <- system.file("extdata", "references.bib", package = "ngr")
+path_bib <- system.file("extdata", "references.bib", package = "xciter")
 citations <- c("Smith2020", "Jones2019")
 xct_bib_keys_missing(path_bib, citations)
 }

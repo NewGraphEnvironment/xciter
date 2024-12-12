@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(ngr)
+library(xciter)
 
-test_check("ngr")
+test_check("xciter")

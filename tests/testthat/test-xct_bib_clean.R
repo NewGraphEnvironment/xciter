@@ -7,7 +7,7 @@ keys <- c(
   "@test2001"
 )
 
-path_bib <- system.file("extdata", "references.bib", package = "ngr")
+path_bib <- system.file("extdata", "references.bib", package = "xciter")
 
 result <- xct_bib_keys_missing(path_bib, keys)
 

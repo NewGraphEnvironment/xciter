@@ -1,5 +1,5 @@
 
-path_bib <- system.file("extdata", "references.bib", package = "ngr")
+path_bib <- system.file("extdata", "references.bib", package = "xciter")
 
 # Example data frame
 dat <- data.frame(
