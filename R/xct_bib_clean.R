@@ -116,23 +116,39 @@ xct_bib_keys_extract <- function(path_bib) {
 #' Guess Matching Citation Keys for Missing Entries
 #'
 #' This function attempts to find the closest matching citation keys for keys
-#' that are missing from a BibTeX file, based on string distance.
+#' that are missing from a BibTeX file, based on string distance. Users can set
+#' a threshold for the maximum allowable distance for a match, optionally
+#' exclude rows where no matches are close enough, and choose the string
+#' distance calculation method.
 #'
 #' @param keys_missing [character] A vector of citation keys that are missing from the BibTeX file.
 #'   Typically obtained using [xct_bib_keys_missing()].
 #' @param keys_bib [character] A vector of citation keys extracted from the BibTeX file.
 #'   Typically obtained using [xct_bib_keys_extract()].
+#' @param stringdist_threshold [numeric] The maximum allowable string distance for a match to be considered valid.
+#'   This value is passed to `stringdist::stringdist()` for the specified method. Distances are non-negative numeric values
+#'   where smaller values indicate greater similarity. For short strings (5-10 characters), use `1-3`; for medium strings
+#'   (10-20 characters), use `3-7`; and for longer strings (>20 characters), use `7-15`. Default is `5`.
+#' @param stringdist_method [character] The method used by `stringdist::stringdist()` to calculate string distances.
+#'   Options include "osa" (Optimal String Alignment, default), "lv" (Levenshtein), "dl" (Damerau-Levenshtein), "jw" (Jaro-Winkler),
+#'   and others. See `stringdist::stringdist()` documentation for details.
+#' @param no_match_rows_include [logical] Whether to include rows for keys with no valid matches in the output.
+#'   Default is `FALSE`, which excludes such rows.
 #'
 #' @inheritParams xct_keys_to_inline
 #' @return A data frame with two columns:
 #'   \describe{
 #'     \item{key_missing}{The missing citation keys.}
-#'     \item{key_missing_guess_match}{The guessed closest matching citation keys.}
+#'     \item{key_missing_guess_match}{The guessed closest matching citation keys (or `NA` if no valid match is found).}
 #'   }
+#'   If `no_match_rows_include = FALSE`, rows with no valid matches are excluded.
+#'
 #' @importFrom stringdist stringdist
+#' @importFrom cli cli_alert_warning cli_alert_success
+#' @importFrom chk chk_character chk_number chk_string chk_flag
 #' @rdname xct_bib_clean
 #' @export
-#' @seealso [xct_bib_keys_missing()], [xct_bib_keys_extract()]
+#' @seealso [xct_bib_keys_missing()], [xct_bib_keys_extract()], [stringdist::stringdist()]
 #'
 #' @examples
 #' # Path to the example BibTeX file
@@ -149,30 +165,60 @@ xct_bib_keys_extract <- function(path_bib) {
 #' # Identify missing keys
 #' keys_missing <- xct_bib_keys_missing(path_bib, keys)
 #'
-#' # Guess matches for missing keys
+#' # Guess matches for missing keys with a string distance threshold and method
 #' xct_keys_guess_match(keys_missing, keys_bib)
-xct_keys_guess_match <- function(keys_missing, keys_bib) {
-  # Create an empty result list
+xct_keys_guess_match <- function(keys_missing, keys_bib, stringdist_threshold = 5,
+                                 stringdist_method = "osa", no_match_rows_include = FALSE) {
+  # Initialize results
   result <- list(key_missing = character(0), key_missing_guess_match = character(0))
+  unmatched_keys <- character(0)
 
-  # Loop through each missing key and find the closest match
   for (key in keys_missing) {
-    # Calculate distances to all bib keys
-    distances <- stringdist::stringdist(key, keys_bib)
-
-    # Find the closest match (minimum distance)
+    distances <- stringdist::stringdist(key, keys_bib, method = stringdist_method)
     closest_index <- which.min(distances)
-    closest_match <- keys_bib[closest_index]
+    closest_distance <- distances[closest_index]
+    closest_match <- ifelse(closest_distance <= stringdist_threshold, keys_bib[closest_index], NA_character_)
 
-    # Append results to the list
+    if (is.na(closest_match)) {
+      unmatched_keys <- c(unmatched_keys, key)
+    }
+
     result$key_missing <- c(result$key_missing, key)
     result$key_missing_guess_match <- c(result$key_missing_guess_match, closest_match)
   }
 
-  # Convert the result to a data.frame
-  return(data.frame(key_missing = result$key_missing,
-                    key_missing_guess_match = result$key_missing_guess_match,
-                    stringsAsFactors = FALSE))
+  if (length(unmatched_keys) > 0) {
+    cli::cli_alert_warning(
+      paste("No valid match found for the following keys (closest distance exceeds",
+            stringdist_threshold, "):", paste(unmatched_keys, collapse = ", "))
+    )
+  }
+
+  result_df <- data.frame(key_missing = result$key_missing,
+                          key_missing_guess_match = result$key_missing_guess_match,
+                          stringsAsFactors = FALSE)
+
+  if (!no_match_rows_include) {
+    result_df <- result_df[!is.na(result_df$key_missing_guess_match), ]
+  }
+
+  return(result_df)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

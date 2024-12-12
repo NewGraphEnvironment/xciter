@@ -10,7 +10,13 @@ xct_bib_keys_missing(path_bib, citations)
 
 xct_bib_keys_extract(path_bib)
 
-xct_keys_guess_match(keys_missing, keys_bib)
+xct_keys_guess_match(
+  keys_missing,
+  keys_bib,
+  stringdist_threshold = 5,
+  stringdist_method = "osa",
+  no_match_rows_include = FALSE
+)
 }
 \arguments{
 \item{path_bib}{A file path to the bibliography file (\code{.bib}) used for citation keys.
@@ -21,6 +27,18 @@ Typically obtained using \code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing
 
 \item{keys_bib}{\link{character} A vector of citation keys extracted from the BibTeX file.
 Typically obtained using \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}.}
+
+\item{stringdist_threshold}{\link{numeric} The maximum allowable string distance for a match to be considered valid.
+This value is passed to \code{stringdist::stringdist()} for the specified method. Distances are non-negative numeric values
+where smaller values indicate greater similarity. For short strings (5-10 characters), use \code{1-3}; for medium strings
+(10-20 characters), use \code{3-7}; and for longer strings (>20 characters), use \code{7-15}. Default is \code{5}.}
+
+\item{stringdist_method}{\link{character} The method used by \code{stringdist::stringdist()} to calculate string distances.
+Options include "osa" (Optimal String Alignment, default), "lv" (Levenshtein), "dl" (Damerau-Levenshtein), "jw" (Jaro-Winkler),
+and others. See \code{stringdist::stringdist()} documentation for details.}
+
+\item{no_match_rows_include}{\link{logical} Whether to include rows for keys with no valid matches in the output.
+Default is \code{FALSE}, which excludes such rows.}
 
 \item{keys}{\link{character} A vector of citation keys to check for in the BibTeX file.}
 }
@@ -33,8 +51,9 @@ A character vector of citation keys extracted from the BibTeX file.
 A data frame with two columns:
 \describe{
 \item{key_missing}{The missing citation keys.}
-\item{key_missing_guess_match}{The guessed closest matching citation keys.}
+\item{key_missing_guess_match}{The guessed closest matching citation keys (or \code{NA} if no valid match is found).}
 }
+If \code{no_match_rows_include = FALSE}, rows with no valid matches are excluded.
 }
 \description{
 This function identifies citation keys provided in a list that are missing from
@@ -44,7 +63,10 @@ file to match the citation keys.
 This function extracts all citation keys from a given BibTeX file.
 
 This function attempts to find the closest matching citation keys for keys
-that are missing from a BibTeX file, based on string distance.
+that are missing from a BibTeX file, based on string distance. Users can set
+a threshold for the maximum allowable distance for a match, optionally
+exclude rows where no matches are close enough, and choose the string
+distance calculation method.
 }
 \examples{
 \dontrun{
@@ -66,11 +88,11 @@ keys_bib <- xct_bib_keys_extract(path_bib)
 # Identify missing keys
 keys_missing <- xct_bib_keys_missing(path_bib, keys)
 
-# Guess matches for missing keys
+# Guess matches for missing keys with a string distance threshold and method
 xct_keys_guess_match(keys_missing, keys_bib)
 }
 \seealso{
-\code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing()}}, \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}
+\code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing()}}, \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}, \code{\link[stringdist:stringdist]{stringdist::stringdist()}}
 
 Other cite: 
 \code{\link{xct_assemble}()},
