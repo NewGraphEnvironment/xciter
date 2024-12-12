@@ -113,12 +113,44 @@ xct_bib_keys_extract <- function(path_bib) {
 }
 
 
+#' Guess Matching Citation Keys for Missing Entries
+#'
+#' This function attempts to find the closest matching citation keys for keys
+#' that are missing from a BibTeX file, based on string distance.
+#'
+#' @param keys_missing [character] A vector of citation keys that are missing from the BibTeX file.
+#'   Typically obtained using [xct_bib_keys_missing()].
+#' @param keys_bib [character] A vector of citation keys extracted from the BibTeX file.
+#'   Typically obtained using [xct_bib_keys_extract()].
+#'
 #' @inheritParams xct_keys_to_inline
-#' @return A character vector of citation keys extracted from the BibTeX file.
-#' @importFrom chk chk_file
+#' @return A data frame with two columns:
+#'   \describe{
+#'     \item{key_missing}{The missing citation keys.}
+#'     \item{key_missing_guess_match}{The guessed closest matching citation keys.}
+#'   }
 #' @importFrom stringdist stringdist
 #' @rdname xct_bib_clean
 #' @export
+#' @seealso [xct_bib_keys_missing()], [xct_bib_keys_extract()]
+#'
+#' @examples
+#' # Path to the example BibTeX file
+#' path_bib <- system.file("extdata", "references.bib", package = "xciter")
+#'
+#' # Define the citation keys to check
+#' keys <- c("busch_etal2011LandscapeLevelModel",
+#'           "kirsch_etal2014Fishinventoryb",
+#'           "test2001")
+#'
+#' # Extract keys from the BibTeX file
+#' keys_bib <- xct_bib_keys_extract(path_bib)
+#'
+#' # Identify missing keys
+#' keys_missing <- xct_bib_keys_missing(path_bib, keys)
+#'
+#' # Guess matches for missing keys
+#' xct_keys_guess_match(keys_missing, keys_bib)
 xct_keys_guess_match <- function(keys_missing, keys_bib) {
   # Create an empty result list
   result <- list(key_missing = character(0), key_missing_guess_match = character(0))
@@ -142,4 +174,5 @@ xct_keys_guess_match <- function(keys_missing, keys_bib) {
                     key_missing_guess_match = result$key_missing_guess_match,
                     stringsAsFactors = FALSE))
 }
+
 

@@ -16,6 +16,12 @@ xct_keys_guess_match(keys_missing, keys_bib)
 \item{path_bib}{A file path to the bibliography file (\code{.bib}) used for citation keys.
 Defaults to \code{"references.bib"} in the current working directory.}
 
+\item{keys_missing}{\link{character} A vector of citation keys that are missing from the BibTeX file.
+Typically obtained using \code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing()}}.}
+
+\item{keys_bib}{\link{character} A vector of citation keys extracted from the BibTeX file.
+Typically obtained using \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}.}
+
 \item{keys}{\link{character} A vector of citation keys to check for in the BibTeX file.}
 }
 \value{
@@ -24,7 +30,11 @@ vector if all citation keys are found.
 
 A character vector of citation keys extracted from the BibTeX file.
 
-A character vector of citation keys extracted from the BibTeX file.
+A data frame with two columns:
+\describe{
+\item{key_missing}{The missing citation keys.}
+\item{key_missing_guess_match}{The guessed closest matching citation keys.}
+}
 }
 \description{
 This function identifies citation keys provided in a list that are missing from
@@ -32,6 +42,9 @@ a specified BibTeX file. It ensures the BibTeX file exists and processes the
 file to match the citation keys.
 
 This function extracts all citation keys from a given BibTeX file.
+
+This function attempts to find the closest matching citation keys for keys
+that are missing from a BibTeX file, based on string distance.
 }
 \examples{
 \dontrun{
@@ -39,8 +52,26 @@ path_bib <- system.file("extdata", "references.bib", package = "xciter")
 citations <- c("Smith2020", "Jones2019")
 xct_bib_keys_missing(path_bib, citations)
 }
+# Path to the example BibTeX file
+path_bib <- system.file("extdata", "references.bib", package = "xciter")
+
+# Define the citation keys to check
+keys <- c("busch_etal2011LandscapeLevelModel",
+          "kirsch_etal2014Fishinventoryb",
+          "test2001")
+
+# Extract keys from the BibTeX file
+keys_bib <- xct_bib_keys_extract(path_bib)
+
+# Identify missing keys
+keys_missing <- xct_bib_keys_missing(path_bib, keys)
+
+# Guess matches for missing keys
+xct_keys_guess_match(keys_missing, keys_bib)
 }
 \seealso{
+\code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing()}}, \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}
+
 Other cite: 
 \code{\link{xct_assemble}()},
 \code{\link{xct_format}()},
