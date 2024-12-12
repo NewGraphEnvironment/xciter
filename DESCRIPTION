@@ -22,7 +22,8 @@ Imports:
     cli,
     fs,
     stringr,
-    stringdist
+    stringdist,
+    xml2
 Depends: 
     R (>= 2.10)
 LazyData: true
