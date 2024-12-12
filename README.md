@@ -3,9 +3,8 @@
 
 # xciter
 
-![Experimental](https://img.shields.io/badge/status-experimental-orange)
 ![Haywire](https://img.shields.io/badge/status-haywire-red)
-![Not-useful?](https://img.shields.io/badge/stas-MaybeNotHelpful-red)
+![MaybeNotHelpful](https://img.shields.io/badge/NeverMind-MaybeNotHelpful-green)
 
 This package focuses solely on “extra” functions related to citeing
 bibliography items such as processing .bib files to get citation keys,
