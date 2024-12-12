@@ -14,8 +14,8 @@ Suggests:
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
-URL: https://github.com/NewGraphEnvironment/ngr/
-BugReports: https://github.com/NewGraphEnvironment/ngr/issues
+URL: https://github.com/NewGraphEnvironment/xciter/
+BugReports: https://github.com/NewGraphEnvironment/xciter/issues
 Imports: 
     chk,
     processx,
