@@ -9,11 +9,11 @@ keys <- c(
 
 path_bib <- system.file("extdata", "references.bib", package = "ngr")
 
-result <- ngr_cite_bib_keys_missing(path_bib, keys)
+result <- excitr_bib_keys_missing(path_bib, keys)
 
 
 
-test_that("ngr_cite_bib_keys_missing returns expected result", {
+test_that("excitr_bib_keys_missing returns expected result", {
 
   # Expected output
   expected <- c("busch_etal2011LandscapeLevelModel", "kirsch_etal2014Fishinventoryb", "test2001")
@@ -22,8 +22,8 @@ test_that("ngr_cite_bib_keys_missing returns expected result", {
   expect_equal(result, expected)
 })
 
-ngr_cite_keys_guess_match(result,
-                          keys_bib = ngr_cite_bib_keys_extract(path_bib)
+excitr_keys_guess_match(result,
+                          keys_bib = excitr_bib_keys_extract(path_bib)
 )
 
 

@@ -13,7 +13,7 @@
 #' @importFrom chk chk_file chk_string
 #' @importFrom processx run
 #' @export
-ngr_cite_keys_to_inline <- function(text, path_bib, csl_file = NULL) {
+excitr_keys_to_inline <- function(text, path_bib, csl_file = NULL) {
   # Check for Pandoc installation
   if (Sys.which("pandoc") == "") {
     stop("Pandoc is not installed or not found in the system PATH. Please install Pandoc.")

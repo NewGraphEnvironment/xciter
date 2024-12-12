@@ -11,15 +11,15 @@ dat <- data.frame(
     "Design long-term water monitoring program to leverage past work and attempt to quantify upstream water quality impacts via tools such as [CABIN](https://www.canada.ca/en/environment-climate-change/services/canadian-aquatic-biomonitoring-network/resources.html) sampling program [@busch_etal2011LandscapeLevelModela], 5 sample in 30 day water quality sampling during both high and low flow periods [@busch_etal2011LandscapeLevelModela; @busch_etal2011LandscapeLevelModela], continuation/expansion of [temperature monitoring](https://public.tableau.com/app/profile/skeena.knowledge.trust/viz/UBRWaterTemperatureMonitoringDashboardDraft/UBRWaterTemp_Dashboard) [@skeenaknowledgetrustUBRWater, @westcott2022UpperBulkleya], quantify amounts of water withdrawn by licensees in the upper Bulkley catchment during the April to September low flow period, etc. Importantly, careful consideration of how to implement water quality program recommendations from @price2014UpperBulkleya, @oliver2020Analysis2017 and @westcott2022UpperBulkleya during this process is also recommended.")
 )
 
-result <- ngr_cite_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
+result <- excitr_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
 
 # Function runs and returns a data.frame
-testthat::test_that("ngr_cite_keys_to_inline_table_col runs and returns data.frame", {
+testthat::test_that("excitr_keys_to_inline_table_col runs and returns data.frame", {
   expect_s3_class(result, "data.frame")  # Checks if result is a tibble
 })
 
 # Function returns a data.frame different from the one input
-testthat::test_that("ngr_cite_keys_to_inline_table_col returns new data.frame", {
+testthat::test_that("excitr_keys_to_inline_table_col returns new data.frame", {
   testthat::expect_false(identical(dat, result))
 })
 

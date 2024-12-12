@@ -11,7 +11,7 @@
 #' @importFrom chk chk_string chk_character
 #' @family cite
 #' @export
-ngr_cite_keys_extract <- function(text, keys_additional = NULL) {
+excitr_keys_extract <- function(text, keys_additional = NULL) {
   # Validate `text` input
   chk::chk_string(text) # Ensures text is a single string
 
@@ -48,29 +48,29 @@ ngr_cite_keys_extract <- function(text, keys_additional = NULL) {
 #' This function extracts citation keys from a specified column in a data frame
 #' and optinally formats them as a character vector or prints them row-wise for easy copy-pasting
 #' into the `nocite` line of YAML in an R Markdown document.  This can be handy when we are using
-#' [ngr_cite_keys_extract()] to format a table column for reporting but we
+#' [excitr_keys_extract()] to format a table column for reporting but we
 #' require the citation keys so that they show up in the references section of the overall report.
 #'
-#' This function builds on [ngr_cite_keys_extract()], and integrates its functionality
+#' This function builds on [excitr_keys_extract()], and integrates its functionality
 #' for working with citation keys extracted from a data frame.
 #'
-#' @inheritParams ngr_cite_keys_to_inline_table_col
+#' @inheritParams excitr_keys_to_inline_table_col
 #' @param print_rowwise Logical. If `TRUE`, formats and prints keys row-wise with a trailing
 #'   comma for easy YAML compatibility. Defaults to `TRUE`.
-#' @param ... Can be used to pass additional citation keys to  [ngr_cite_keys_extract()] in case there are
+#' @param ... Can be used to pass additional citation keys to  [excitr_keys_extract()] in case there are
 #' citation keys additional to the ones in the table that you want in the output.
 #' @return A character vector of citation keys extracted from a data frame column.
 #' @importFrom chk chk_data chk_string chk_logical
-#' @seealso [ngr_cite_keys_extract()]
-#' @rdname ngr_cite_keys_extract
+#' @seealso [excitr_keys_extract()]
+#' @rdname excitr_keys_extract
 #' @export
-ngr_cite_keys_extract_table <- function(dat, col_format, print_rowwise = TRUE, ...) {
+excitr_keys_extract_table <- function(dat, col_format, print_rowwise = TRUE, ...) {
   chk::chk_data(dat)
   chk::chk_string(col_format)
   chk::chk_logical(print_rowwise)
 
   # Extract the column and collapse it into a single string
-  result <- ngr_cite_keys_extract(paste(dat[[col_format]], collapse = ", "), ...)
+  result <- excitr_keys_extract(paste(dat[[col_format]], collapse = ", "), ...)
 
   if (print_rowwise) {
     # Split the result by commas and print each item on a new line

@@ -8,7 +8,7 @@
 #' @importFrom cli cli_abort
 #' @family cite
 #' @return Formatted citation as a string.
-ngr_cite_format_single <- function(key, bib_obj, key_abort_on_missing = TRUE, ...) {
+excitr_format_single <- function(key, bib_obj, key_abort_on_missing = TRUE, ...) {
 
   chk::chk_string(key)
   chk::chk_list(bib_obj)
@@ -77,7 +77,7 @@ ngr_cite_format_single <- function(key, bib_obj, key_abort_on_missing = TRUE, ..
 #' @param ... Additional arguments passed from the main function.
 #' @family cite
 #' @return Formatted citation as a string.
-ngr_cite_format <- function(raw_key, bib_obj, ...) {
+excitr_format <- function(raw_key, bib_obj, ...) {
   # Check if raw_key is a multiple citation (enclosed in square brackets)
   if (grepl("^\\[.*\\]$", raw_key)) {
     # Remove the outer brackets from the multiple citation string
@@ -88,24 +88,24 @@ ngr_cite_format <- function(raw_key, bib_obj, ...) {
     keys <- sub("^@", "", keys)
     # Format each citation key individually without parentheses for multiple citations
     formatted_citations <- sapply(keys, function(key) {
-      ngr_cite_format_single(key, bib_obj, ...)
+      excitr_format_single(key, bib_obj, ...)
     })
     # Assemble the formatted citations into a single citation string wrapped in parentheses
-    citation <- paste0("(", ngr_cite_assemble(formatted_citations), ")")
+    citation <- paste0("(", excitr_assemble(formatted_citations), ")")
 
     # If the raw_key is a single citation prefixed by '@'
   } else if (grepl("^@.+$", raw_key)) {
     # Remove the '@' symbol from the key
     key <- sub("^@", "", raw_key)
     # Format the single citation key with "Author (Year)" format
-    citation <- ngr_cite_format_single(key, bib_obj, ...)
+    citation <- excitr_format_single(key, bib_obj, ...)
     citation <- sub("(\\d{4})$", "(\\1)", citation)  # Wrap only the year in parentheses
 
     # If raw_key does not have square brackets or '@', treat it as a basic single key
   } else {
     key <- raw_key
     # Format the citation directly as a single key with "Author (Year)" format
-    citation <- ngr_cite_format_single(key, bib_obj, ...)
+    citation <- excitr_format_single(key, bib_obj, ...)
     citation <- sub("(\\d{4})$", "(\\1)", citation)  # Wrap only the year in parentheses
   }
 
@@ -122,7 +122,7 @@ ngr_cite_format <- function(raw_key, bib_obj, ...) {
 #' @param citations A vector of citation strings.
 #' @family cite
 #' @return A single string with all citations separated by semicolons.
-ngr_cite_assemble <- function(citations) {
+excitr_assemble <- function(citations) {
   citations <- citations[!is.na(citations)]
   if (length(citations) == 0) {
     return("")
@@ -134,7 +134,7 @@ ngr_cite_assemble <- function(citations) {
 
 #' Generate Cross-reference Data Frame with Original Keys in One Column and Inline APA-Style Citations in Another.
 #'
-#' We probably just want to use [ngr_cite_keys_to_inline()] or [ngr_cite_keys_to_inline_table_col()]but this will
+#' We probably just want to use [excitr_keys_to_inline()] or [excitr_keys_to_inline_table_col()]but this will
 #' This function requires the `RefManageR` package. If it is not installed, you can install it with
 #' `install.packages("RefManageR")`.
 #'
@@ -149,15 +149,15 @@ ngr_cite_assemble <- function(citations) {
 #' @importFrom RefManageR ReadBib
 #' @importFrom chk chk_character chk_string chk_flag
 #' @importFrom cli cli_abort
-#' @seealso [ngr_cite_keys_to_inline()], [ngr_cite_keys_to_inline_table_col()]
+#' @seealso [excitr_keys_to_inline()], [excitr_keys_to_inline_table_col()]
 #' @export
 #' @examples
 #' \dontrun{
 #' path_bib <- "path/to/references.bib"
 #' citation_keys <- c("@smith2000", "[@smith2001; @doe2005]")
-#' ngr_cite_keys_to_xref(citation_keys, path_bib)
+#' excitr_keys_to_xref(citation_keys, path_bib)
 #' }
-ngr_cite_keys_to_xref <- function(citation_keys, path_bib, key_abort_on_missing = TRUE, key_check_response = "warn") {
+excitr_keys_to_xref <- function(citation_keys, path_bib, key_abort_on_missing = TRUE, key_check_response = "warn") {
   chk::chk_character(citation_keys)
   chk::chk_string(path_bib)
   chk::chk_file(path_bib)
@@ -170,9 +170,9 @@ ngr_cite_keys_to_xref <- function(citation_keys, path_bib, key_abort_on_missing 
   # Read the bibliography file
   bib_obj <- RefManageR::ReadBib(path_bib, check = key_check_response)
 
-  # Process each citation key through ngr_cite_format
+  # Process each citation key through excitr_format
   reference_list <- sapply(citation_keys, function(key) {
-    ngr_cite_format(key, bib_obj, key_abort_on_missing = key_abort_on_missing)
+    excitr_format(key, bib_obj, key_abort_on_missing = key_abort_on_missing)
   })
 
   # Create a data.frame to store citation keys and their formatted references

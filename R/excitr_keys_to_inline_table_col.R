@@ -1,6 +1,6 @@
 #' Transform Citation Keys in a Data Frame Column
 #'
-#' This function applies the \link{ngr_cite_keys_to_inline} transformation to a specified column
+#' This function applies the \link{excitr_keys_to_inline} transformation to a specified column
 #' in a data frame. It validates the inputs, checks that the specified column exists in the
 #' data frame, and replaces citation keys with inline citations.
 #'
@@ -9,7 +9,7 @@
 #' @param path_bib A file path to the bibliography file (`.bib`) used for citation keys.
 #'   Defaults to `"references.bib"` in the current working directory.
 #' @return A data frame with the specified column transformed.
-#' @rdname ngr_cite_keys_to_inline
+#' @rdname excitr_keys_to_inline
 #' @family cite
 #' @importFrom chk chk_data chk_string
 #' @importFrom cli cli_abort
@@ -27,12 +27,12 @@
 #' )
 #'
 #' # Process the data frame
-#' result <- ngr_cite_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
+#' result <- excitr_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
 #' result
 #'
 
 #' @export
-ngr_cite_keys_to_inline_table_col <- function(dat = NULL, col_format = NULL, path_bib = "references.bib") {
+excitr_keys_to_inline_table_col <- function(dat = NULL, col_format = NULL, path_bib = "references.bib") {
   # Validate inputs
   chk::chk_data(dat)
   chk::chk_string(col_format)
@@ -43,6 +43,6 @@ ngr_cite_keys_to_inline_table_col <- function(dat = NULL, col_format = NULL, pat
   }
 
   # Transform the specified column
-  dat[[col_format]] <- sapply(dat[[col_format]], function(x) ngr_cite_keys_to_inline(x, path_bib = path_bib))
+  dat[[col_format]] <- sapply(dat[[col_format]], function(x) excitr_keys_to_inline(x, path_bib = path_bib))
   dat
 }

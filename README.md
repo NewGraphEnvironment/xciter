@@ -41,7 +41,7 @@ dat <- data.frame(
     "this is a failed key @key3"
   )
 )
-result <- ngr::ngr_cite_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
+result <- ngr::excitr_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
 print(result)
 #>   id
 #> 1  1

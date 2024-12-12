@@ -2,10 +2,10 @@
 # passed to the function but not included in the bib file so follow up can be done to determine thier
 # correct keys (if present in the BibTex file)
 
-#' @inheritParams ngr_cite_keys_to_inline
+#' @inheritParams excitr_keys_to_inline
 #' @export
 
-ngr_cite_bib_clean <- function(path_bib, keys, output_file) {
+excitr_bib_clean <- function(path_bib, keys, output_file) {
   fs::file_create(output_file)
   # Read the entire BibTeX file
   lines <- readLines(path_bib)
@@ -42,14 +42,14 @@ ngr_cite_bib_clean <- function(path_bib, keys, output_file) {
 #' This function identifies citation keys provided in a list that are missing from
 #' a specified BibTeX file. It ensures the BibTeX file exists and processes the
 #' file to match the citation keys.
-#' @inheritParams ngr_cite_keys_to_inline
+#' @inheritParams excitr_keys_to_inline
 #' @param keys [character] A vector of citation keys to check for in the BibTeX file.
 #'
 #' @importFrom cli cli_alert_success cli_alert_warning
 #' @importFrom chk chk_file chk_string chk_character
 #' @family cite
 #' @export
-#' @rdname ngr_cite_bib_clean
+#' @rdname excitr_bib_clean
 #'
 #' @return A vector of citation keys missing from the BibTeX file. Returns an empty
 #'   vector if all citation keys are found.
@@ -57,16 +57,16 @@ ngr_cite_bib_clean <- function(path_bib, keys, output_file) {
 #' \dontrun{
 #' path_bib <- system.file("extdata", "references.bib", package = "ngr")
 #' citations <- c("Smith2020", "Jones2019")
-#' ngr_cite_bib_keys_missing(path_bib, citations)
+#' excitr_bib_keys_missing(path_bib, citations)
 #' }
-ngr_cite_bib_keys_missing <- function(path_bib, citations) {
+excitr_bib_keys_missing <- function(path_bib, citations) {
   # Validate inputs
   chk::chk_string(path_bib)
   chk::chk_file(path_bib)
   chk::chk_character(citations)
 
 
-  keys_bib <- ngr_cite_bib_keys_extract(path_bib)
+  keys_bib <- excitr_bib_keys_extract(path_bib)
 
 
   # Clean input citations by removing leading '@' if present
@@ -91,12 +91,12 @@ ngr_cite_bib_keys_missing <- function(path_bib, citations) {
 #'
 #' This function extracts all citation keys from a given BibTeX file.
 #'
-#' @inheritParams ngr_cite_keys_to_inline
+#' @inheritParams excitr_keys_to_inline
 #' @return A character vector of citation keys extracted from the BibTeX file.
 #' @importFrom chk chk_file
-#' @rdname ngr_cite_bib_clean
+#' @rdname excitr_bib_clean
 #' @export
-ngr_cite_bib_keys_extract <- function(path_bib) {
+excitr_bib_keys_extract <- function(path_bib) {
   # Validate the input file
   chk::chk_file(path_bib)
 
@@ -113,13 +113,13 @@ ngr_cite_bib_keys_extract <- function(path_bib) {
 }
 
 
-#' @inheritParams ngr_cite_keys_to_inline
+#' @inheritParams excitr_keys_to_inline
 #' @return A character vector of citation keys extracted from the BibTeX file.
 #' @importFrom chk chk_file
 #' @importFrom stringdist stringdist
-#' @rdname ngr_cite_bib_clean
+#' @rdname excitr_bib_clean
 #' @export
-ngr_cite_keys_guess_match <- function(keys_missing, keys_bib) {
+excitr_keys_guess_match <- function(keys_missing, keys_bib) {
   # Create an empty result list
   result <- list(key_missing = character(0), key_missing_guess_match = character(0))
 
