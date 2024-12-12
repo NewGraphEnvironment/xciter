@@ -5,7 +5,7 @@
 
 ![Experimental](https://img.shields.io/badge/status-experimental-orange)
 ![Haywire](https://img.shields.io/badge/status-haywire-red)
-![Not-useful?](https://img.shields.io/badge/status-Not-useful?-red)
+![Not-useful?](https://img.shields.io/badge/stas-MaybeNotHelpful-red)
 
 This package focuses solely on “extra” functions related to citeing
 bibliography items such as processing .bib files to get citation keys,
@@ -16,12 +16,12 @@ the results we desire so we need to do it with manual calls to `pandoc`.
 
 ## Installation
 
-You can install the development version of ngr from
+You can install the development version of xciter from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-pak::pkg_install("NewGraphEnvironment/ngr")
+pak::pkg_install("NewGraphEnvironment/xciter")
 ```
 
 ## Example
@@ -32,7 +32,7 @@ This is a basic example which shows you how to solve a common problem:
 library(xciter)
 ## basic example code
 
-path_bib <- system.file("extdata", "references.bib", package = "ngr")
+path_bib <- system.file("extdata", "references.bib", package = "xciter")
 dat <- data.frame(
   id = 1:3,
   bib_keys = c(
