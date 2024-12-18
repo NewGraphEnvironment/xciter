@@ -66,7 +66,10 @@ xct_bib_keys_missing <- function(path_bib, citations) {
   chk::chk_character(citations)
 
 
-  keys_bib <- xct_bib_keys_extract(path_bib)
+  keys_bib <- sort( #sort to ease debugging
+    xct_bib_keys_extract(path_bib)
+  )
+
 
 
   # Clean input citations by removing leading '@' if present

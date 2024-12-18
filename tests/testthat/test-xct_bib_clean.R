@@ -10,6 +10,8 @@ keys <- c(
 
 path_bib <- system.file("extdata", "references.bib", package = "xciter")
 
+keys_bib <- xct_bib_keys_extract(path_bib)
+
 keys_missing <- xct_bib_keys_missing(path_bib, keys)
 
 
