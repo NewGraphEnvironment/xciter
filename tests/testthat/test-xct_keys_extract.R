@@ -24,6 +24,8 @@ expected_output_rowwise <- c(
   "@johnston_slaney1996FishHabitat"
 )
 
+table_test <- readRDS(testthat::test_path("table_test.rds"))
+
 
 # Test the function
 result <- xct_keys_extract_table(

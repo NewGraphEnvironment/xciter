@@ -18,4 +18,4 @@ table_test <- tibble::tribble(
   NA, "High Fisheries Value Areas", "Spatially delineate areas of high fisheries values based on known spawning and rearing habitat for fish species of interest. Where data gaps exist, develop study plans to understand where this high-value habitat is and quantify its value for fish species of interest through standardized methodologies such as Fish and Fish Habitat Assessment Procedures [@johnston_slaney1996FishHabitat]. For known spawning and rearing locations, load reviewed data into `bcfishpass` using the `user_habitat_classification.csv` file located [here](https://github.com/smnorris/bcfishpass/blob/main/data/user_habitat_classification.csv) so it can be pulled into the collaborative GIS project and queried to facilitate priority ranking of areas of high fisheries values."
 )
 
-usethis::use_data(table_test, overwrite = TRUE)
+saveRDS(table_test, file = "tests/testthat/table_test.rds")
