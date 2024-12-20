@@ -50,7 +50,13 @@
 <div class="page-header"><h1 id="xciter">xciter<a class="anchor" aria-label="anchor" href="#xciter"></a>
 </h1></div>
 <p><img src="https://img.shields.io/badge/status-haywire-red" alt="Haywire"><img src="https://img.shields.io/badge/NeverMind-MaybeNotHelpful-green" alt="MaybeNotHelpful"></p>
-<p>This package focuses solely on “extra” functions related to citeing bibliography items such as processing .bib files to get citation keys, processing BiBtex keys to get inline citations, etc. This work was inspired by the need to find a way to process citation keys to inline citation text in DT tables as rendering in rmarkdown does not produce the results we desire so we need to do it with manual calls to <code>pandoc</code>.</p>
+<p>This package focuses solely on “extra” functions related to citeing bibliography items such as processing .bib files to get citation keys, processing BiBtex keys to get inline citations, etc. We are calling it “extra” because we rely heavily on <a href="https://github.com/paleolimbot/rbbt" class="external-link"><code>rbbt</code></a> and standard <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render</a></code> magic to almost everything we need to do. Some functions for rendering citation keys as inline references wrap calls to <code>pandoc</code> so that needs to be installed. If you have Rstudion you likely have it already.</p>
+<p>This package deals with a few problems as follows:</p>
+<ul>
+<li>Identify all citation keys in documents and confirm their presence in a specified .bib file.</li>
+<li>Highlight citation keys that do not match and suggest the closest matching keys from the .bib file.</li>
+<li>Provide workarounds for citation handling in interactive tables <a href="https://github.com/rstudio/DT" class="external-link">(DT)</a> and other HTML outputs where standard citation rendering in R Markdown and Quarto may fail.</li>
+</ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -62,17 +68,17 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>This is a basic example of subbing citation keys for inline references within a table so that it can be rendered as is after the changes are made:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/NewGraphEnvironment/xciter/" class="external-link">xciter</a></span><span class="op">)</span></span>
 <span><span class="co">## basic example code</span></span>
 <span></span>
-<span><span class="va">path_bib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"references.bib"</span>, package <span class="op">=</span> <span class="st">"xciter"</span><span class="op">)</span></span>
+<span><span class="va">path_bib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"NewGraphEnvironment.bib"</span>, package <span class="op">=</span> <span class="st">"xciter"</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
 <span>  bib_keys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Outside block quotes @busch_etal2011LandscapeLevelModela and in [@woll_etal2017SalmonEcological]"</span>,</span>
-<span>    <span class="st">"This is many [@busch_etal2011LandscapeLevelModela; @woll_etal2017SalmonEcological; @kirsch_etal2014Fishinventory]"</span>,</span>
+<span>    <span class="st">"This is many [@busch_etal2011LandscapeLevelModela; @woll_etal2017SalmonEcological; @kirsch_etal2014Fishinventorya]"</span>,</span>
 <span>    <span class="st">"this is a failed key @key3"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -86,6 +92,17 @@
 <span><span class="co">#&gt; 1                    Outside block quotes Busch et al. (2011) and in (Woll, Albert, and Whited 2017)</span></span>
 <span><span class="co">#&gt; 2 This is many (Busch et al. 2011; Woll, Albert, and Whited 2017; Kirsch, Buckwalter, and Reed 2014)</span></span>
 <span><span class="co">#&gt; 3                                                                       this is a failed key (key3?)</span></span></code></pre></div>
+<p>This is a basic example of checking if the citation keys within a bookdown document are found within a specified <code>.bib</code> file.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">key_missing</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/xct_bib_clean.html">xct_bib_keys_missing</a></span><span class="op">(</span><span class="va">path_bib</span>, <span class="st">"kirsch_etal2014Fishinventory"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ! The following citations were not found in the BibTeX file:</span></span>
+<span><span class="co">#&gt; [1] "kirsch_etal2014Fishinventory"</span></span></code></pre></div>
+<p><br></p>
+<p>This is an example of how to search for the closest match for an unmatched key.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xct_bib_clean.html">xct_keys_guess_match</a></span><span class="op">(</span><span class="va">key_missing</span>, keys_bib <span class="op">=</span> <span class="fu"><a href="reference/xct_bib_clean.html">xct_bib_keys_extract</a></span><span class="op">(</span><span class="va">path_bib</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                    key_missing       key_missing_guess_match</span></span>
+<span><span class="co">#&gt; 1 kirsch_etal2014Fishinventory kirsch_etal2014Fishinventorya</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
