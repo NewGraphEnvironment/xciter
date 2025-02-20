@@ -18,6 +18,10 @@ have it already.
 
 This package deals with a few problems as follows:
 
+- Provides a central place for us to keep an up to date
+  `NewGraphEnvironment.bib` file representing our shared library. Can be
+  found here
+  `path_bib <- system.file("extdata", "NewGraphEnvironment.bib", package = "xciter")`
 - Identify all citation keys in documents and confirm their presence in
   a specified .bib file.
 - Highlight citation keys that do not match and suggest the closest
