@@ -70,8 +70,8 @@ distance calculation method.</p>
 <span><span class="fu">xct_keys_guess_match</span><span class="op">(</span></span>
 <span>  <span class="va">keys_missing</span>,</span>
 <span>  <span class="va">keys_bib</span>,</span>
-<span>  stringdist_threshold <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>  stringdist_method <span class="op">=</span> <span class="st">"osa"</span>,</span>
+<span>  stringdist_threshold <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  stringdist_method <span class="op">=</span> <span class="st">"dl"</span>,</span>
 <span>  no_match_rows_include <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,15 +97,17 @@ Typically obtained using <code>xct_bib_keys_extract()</code>.</p></dd>
 
 <dt id="arg-stringdist-threshold">stringdist_threshold<a class="anchor" aria-label="anchor" href="#arg-stringdist-threshold"></a></dt>
 <dd><p><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a> The maximum allowable string distance for a match to be considered valid.
-This value is passed to <code><a href="https://rdrr.io/pkg/stringdist/man/stringdist.html" class="external-link">stringdist::stringdist()</a></code> for the specified method. Distances are non-negative numeric values
+This value is passed to <code>[stringdist::stringdist()]</code> for the specified method. Distances are non-negative numeric values
 where smaller values indicate greater similarity. For short strings (5-10 characters), use <code>1-3</code>; for medium strings
-(10-20 characters), use <code>3-7</code>; and for longer strings (&gt;20 characters), use <code>7-15</code>. Default is <code>5</code>.</p></dd>
+(10-20 characters), use <code>3-7</code>; and for longer strings (&gt;20 characters), use <code>7-15</code>. Default is <code>15</code>. Interestingly,
+we see some accurate matches at 25 however we also get mismatches when we go this high which could result in
+incorrect citations if we find replace those!!</p></dd>
 
 
 <dt id="arg-stringdist-method">stringdist_method<a class="anchor" aria-label="anchor" href="#arg-stringdist-method"></a></dt>
-<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The method used by <code><a href="https://rdrr.io/pkg/stringdist/man/stringdist.html" class="external-link">stringdist::stringdist()</a></code> to calculate string distances.
+<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The method used by <code>[stringdist::stringdist()]</code> to calculate string distances.
 Options include "osa" (Optimal String Alignment, default), "lv" (Levenshtein), "dl" (Damerau-Levenshtein), "jw" (Jaro-Winkler),
-and others. See <code><a href="https://rdrr.io/pkg/stringdist/man/stringdist.html" class="external-link">stringdist::stringdist()</a></code> documentation for details.</p></dd>
+and others. See <code>[stringdist::stringdist()]</code> documentation for details. Default is "dl".</p></dd>
 
 
 <dt id="arg-no-match-rows-include">no_match_rows_include<a class="anchor" aria-label="anchor" href="#arg-no-match-rows-include"></a></dt>
@@ -169,10 +171,10 @@ vector if all citation keys are found.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Guess matches for missing keys with a string distance threshold and method</span></span></span>
 <span class="r-in"><span><span class="fu">xct_keys_guess_match</span><span class="op">(</span><span class="va">keys_missing</span>, <span class="va">keys_bib</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No valid match found for the following keys (closest distance exceeds 5 ): test2001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         key_missing            key_missing_guess_match</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 busch_etal2011LandscapeLevelModel busch_etal2011LandscapeLevelModela</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     kirsch_etal2014Fishinventoryb       kirsch_etal2014Fishinventory</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                          test2001                      data_fish_obs</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
