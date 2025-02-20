@@ -13,8 +13,8 @@ xct_bib_keys_extract(path_bib)
 xct_keys_guess_match(
   keys_missing,
   keys_bib,
-  stringdist_threshold = 5,
-  stringdist_method = "osa",
+  stringdist_threshold = 15,
+  stringdist_method = "dl",
   no_match_rows_include = FALSE
 )
 }
@@ -29,13 +29,15 @@ Typically obtained using \code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing
 Typically obtained using \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}.}
 
 \item{stringdist_threshold}{\link{numeric} The maximum allowable string distance for a match to be considered valid.
-This value is passed to \code{stringdist::stringdist()} for the specified method. Distances are non-negative numeric values
+This value is passed to \verb{[stringdist::stringdist()]} for the specified method. Distances are non-negative numeric values
 where smaller values indicate greater similarity. For short strings (5-10 characters), use \code{1-3}; for medium strings
-(10-20 characters), use \code{3-7}; and for longer strings (>20 characters), use \code{7-15}. Default is \code{5}.}
+(10-20 characters), use \code{3-7}; and for longer strings (>20 characters), use \code{7-15}. Default is \code{15}. Interestingly,
+we see some accurate matches at 25 however we also get mismatches when we go this high which could result in
+incorrect citations if we find replace those!!}
 
-\item{stringdist_method}{\link{character} The method used by \code{stringdist::stringdist()} to calculate string distances.
+\item{stringdist_method}{\link{character} The method used by \verb{[stringdist::stringdist()]} to calculate string distances.
 Options include "osa" (Optimal String Alignment, default), "lv" (Levenshtein), "dl" (Damerau-Levenshtein), "jw" (Jaro-Winkler),
-and others. See \code{stringdist::stringdist()} documentation for details.}
+and others. See \verb{[stringdist::stringdist()]} documentation for details. Default is "dl".}
 
 \item{no_match_rows_include}{\link{logical} Whether to include rows for keys with no valid matches in the output.
 Default is \code{FALSE}, which excludes such rows.}
