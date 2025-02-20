@@ -53,6 +53,8 @@
 <p>This package focuses solely on “extra” functions related to citeing bibliography items such as processing .bib files to get citation keys, processing BiBtex keys to get inline citations, etc. We are calling it “extra” because we rely heavily on <a href="https://github.com/paleolimbot/rbbt" class="external-link"><code>rbbt</code></a> and standard <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render</a></code> magic to almost everything we need to do. Some functions for rendering citation keys as inline references wrap calls to <code>pandoc</code> so that needs to be installed. If you have Rstudion you likely have it already.</p>
 <p>This package deals with a few problems as follows:</p>
 <ul>
+<li>Provides a central place for us to keep an up to date <code>NewGraphEnvironment.bib</code> file representing our shared library. Can be found here <code>path_bib &lt;- system.file("extdata", "NewGraphEnvironment.bib", package = "xciter")</code>
+</li>
 <li>Identify all citation keys in documents and confirm their presence in a specified .bib file.</li>
 <li>Highlight citation keys that do not match and suggest the closest matching keys from the .bib file.</li>
 <li>Provide workarounds for citation handling in interactive tables <a href="https://github.com/rstudio/DT" class="external-link">(DT)</a> and other HTML outputs where standard citation rendering in R Markdown and Quarto may fail.</li>
