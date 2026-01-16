@@ -61,11 +61,7 @@ result
 }
 \seealso{
 Other cite: 
-\code{\link{xct_assemble}()},
 \code{\link{xct_bib_keys_missing}()},
-\code{\link{xct_format}()},
-\code{\link{xct_format_single}()},
-\code{\link{xct_keys_extract}()},
-\code{\link{xct_keys_to_xref}()}
+\code{\link{xct_keys_extract}()}
 }
 \concept{cite}
