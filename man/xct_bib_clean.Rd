@@ -97,11 +97,7 @@ xct_keys_guess_match(keys_missing, keys_bib)
 \code{\link[=xct_bib_keys_missing]{xct_bib_keys_missing()}}, \code{\link[=xct_bib_keys_extract]{xct_bib_keys_extract()}}, \code{\link[stringdist:stringdist]{stringdist::stringdist()}}
 
 Other cite: 
-\code{\link{xct_assemble}()},
-\code{\link{xct_format}()},
-\code{\link{xct_format_single}()},
 \code{\link{xct_keys_extract}()},
-\code{\link{xct_keys_to_inline}()},
-\code{\link{xct_keys_to_xref}()}
+\code{\link{xct_keys_to_inline}()}
 }
 \concept{cite}
