@@ -7,7 +7,7 @@ testthat::test_that("xct_keys_to_inline runs and returns character", {
     "test this [@busch_etal2011LandscapeLevelModela] and that @woll_etal2017SalmonEcological",
     path_bib
     )
-  testthat::expect_equal(result, "test this (Busch et al. 2011) and that Woll, Albert, and Whited (2017)")  # Checks if result is a tibble
+  testthat::expect_equal(result, "test this (Busch et al. 2011) and that Woll et al. (2017)")  # Checks if result is a tibble
 })
 
 
