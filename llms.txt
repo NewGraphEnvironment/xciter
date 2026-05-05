@@ -32,6 +32,7 @@ You can install the development version of xciter from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("devtools")
 pak::pkg_install("NewGraphEnvironment/xciter")
 ```
@@ -43,6 +44,7 @@ within a table so that it can be rendered as is after the changes are
 made:
 
 ``` r
+
 library(xciter)
 ## basic example code
 
@@ -71,6 +73,7 @@ This is a basic example of checking if the citation keys within a
 bookdown document are found within a specified `.bib` file.
 
 ``` r
+
 key_missing <- xct_bib_keys_missing(path_bib, "kirsch_etal2014Fishinventory")
 #> ! The following citations were not found in the BibTeX file:
 #> [1] "kirsch_etal2014Fishinventory"
@@ -82,6 +85,7 @@ This is an example of how to search for the closest match for an
 unmatched key.
 
 ``` r
+
 xct_keys_guess_match(key_missing, keys_bib = xct_bib_keys_extract(path_bib))
 #>                    key_missing       key_missing_guess_match
 #> 1 kirsch_etal2014Fishinventory kirsch_etal2014Fishinventorya

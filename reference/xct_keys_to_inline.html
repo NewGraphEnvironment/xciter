@@ -118,14 +118,10 @@ which uses Pandoc's default citation style.</p></dd>
 <span class="r-in"><span><span class="co"># Process the data frame</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">xct_keys_to_inline_table_col</span><span class="op">(</span><span class="va">dat</span>, col_format <span class="op">=</span> <span class="st">"bib_keys"</span>, path_bib <span class="op">=</span> <span class="va">path_bib</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                             bib_keys</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                    Outside block quotes Busch et al. (2011) and in (Woll, Albert, and Whited 2017)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 This is many (Busch et al. 2011; Woll, Albert, and Whited 2017; Kirsch, Buckwalter, and Reed 2014)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                       this is a failed key (key3?)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id                                                               bib_keys</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1     Outside block quotes Busch et al. (2011) and in (Woll et al. 2017)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 This is many (Busch et al. 2011; Woll et al. 2017; Kirsch et al. 2014)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3                                           this is a failed key (key3?)</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

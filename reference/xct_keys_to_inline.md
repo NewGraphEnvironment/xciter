@@ -77,12 +77,8 @@ dat <- data.frame(
 # Process the data frame
 result <- xct_keys_to_inline_table_col(dat, col_format = "bib_keys", path_bib = path_bib)
 result
-#>   id
-#> 1  1
-#> 2  2
-#> 3  3
-#>                                                                                             bib_keys
-#> 1                    Outside block quotes Busch et al. (2011) and in (Woll, Albert, and Whited 2017)
-#> 2 This is many (Busch et al. 2011; Woll, Albert, and Whited 2017; Kirsch, Buckwalter, and Reed 2014)
-#> 3                                                                       this is a failed key (key3?)
+#>   id                                                               bib_keys
+#> 1  1     Outside block quotes Busch et al. (2011) and in (Woll et al. 2017)
+#> 2  2 This is many (Busch et al. 2011; Woll et al. 2017; Kirsch et al. 2014)
+#> 3  3                                           this is a failed key (key3?)
 ```
