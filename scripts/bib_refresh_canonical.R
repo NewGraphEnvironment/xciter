@@ -5,7 +5,7 @@
 # active (default JSON-RPC endpoint at http://localhost:23119/better-bibtex/json-rpc).
 #
 # Usage (from xciter repo root):
-#   Rscript scripts/refresh_canonical_bib.R
+#   Rscript scripts/bib_refresh_canonical.R
 #
 # Pass an integer library_id as the first arg to override the default
 # (`getOption("rbbt.default.library_id")` if set, else 1).
@@ -37,8 +37,7 @@ if (!isTRUE(ok)) {
   stop("Zotero+BBT not reachable. Make sure Zotero is running with Better BibTeX active.")
 }
 
-# Resolve library name from id (for filtering search results, since
-# item.search returns items from all libraries with a `library` name field).
+# Resolve library name from id (display only).
 libs <- rbbt::bbt_libraries()
 lib_row <- libs[libs$id == library_id, , drop = FALSE]
 if (nrow(lib_row) == 0) {
@@ -48,24 +47,43 @@ if (nrow(lib_row) == 0) {
 library_name <- lib_row$name[1]
 cat(sprintf("Library name: %s\n", library_name))
 
-# Step 1: enumerate all citekeys in the target library.
-# BBT doesn't expose a `library.export` bulk endpoint in this version,
-# but `item.search(" ")` returns every item across all libraries with
-# `citekey` and `library` fields. Filter to the target library.
-cat("Enumerating items via item.search ...\n")
-search_resp <- rbbt::bbt_call_json_rpc("item.search", " ")
-if (!is.null(search_resp$error)) {
-  stop("item.search error: ", search_resp$error$message)
+# Step 1: enumerate every citekey in the target library by reading
+# Zotero's SQLite directly. We previously used `item.search(" ")` for
+# enumeration but BBT's text index requires whitespace in indexed
+# fields, so items like `cogeotiff/rio-cogeo` were silently skipped.
+# Reading citekeys straight from the DB returns the real set.
+#
+# Copy to /tmp first so we don't fight Zotero for the file lock.
+zotero_db_src <- path.expand("~/Zotero/zotero.sqlite")
+if (!file.exists(zotero_db_src)) {
+  stop("Zotero database not found at ", zotero_db_src)
 }
-all_items <- search_resp$result
-cat(sprintf("Total items across all libraries: %d\n", length(all_items)))
+zotero_db <- file.path(tempdir(), "zotero.sqlite")
+file.copy(zotero_db_src, zotero_db, overwrite = TRUE)
 
-in_target <- vapply(all_items,
-                    function(x) identical(x$library, library_name),
-                    logical(1))
-target_items <- all_items[in_target]
-target_keys  <- vapply(target_items, function(x) x$citekey, character(1))
-cat(sprintf("Items in '%s': %d\n", library_name, length(target_keys)))
+sql <- paste(
+  "SELECT idv.value",
+  "FROM items i",
+  "JOIN itemData id ON i.itemID = id.itemID",
+  "JOIN itemDataValues idv ON id.valueID = idv.valueID",
+  "JOIN fields f ON id.fieldID = f.fieldID",
+  sprintf("WHERE f.fieldName = 'citationKey' AND i.libraryID = %d", library_id),
+  "AND i.itemID NOT IN (SELECT itemID FROM deletedItems);",
+  sep = " "
+)
+
+cat("Enumerating citekeys via SQLite ...\n")
+# Pipe SQL via stdin — `system2` shells-out on macOS when stdout=TRUE,
+# and the parentheses in `NOT IN (SELECT ...)` get parsed by /bin/sh.
+sql_file <- tempfile(fileext = ".sql")
+writeLines(sql, sql_file)
+target_keys <- system2("sqlite3", args = c("-readonly", zotero_db),
+                       stdin = sql_file, stdout = TRUE)
+if (!length(target_keys)) {
+  stop(sprintf("No citekeys found for libraryID %d — check that BBT has populated the citationKey field.", library_id))
+}
+cat(sprintf("Items in '%s' (libraryID %d): %d\n",
+            library_name, library_id, length(target_keys)))
 
 # BBT's item.export lookup chokes on citekeys containing `@` (typically
 # auto-generated from email-based author names like dfg_webmaster@alaska.gov).
