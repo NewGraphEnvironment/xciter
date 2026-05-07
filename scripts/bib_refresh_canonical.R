@@ -139,6 +139,20 @@ if (length(failed_keys) > 0) {
 bib_text <- paste(bib_chunks, collapse = "\n")
 if (!nzchar(bib_text)) stop("Empty bib text after batched export")
 
+# Sort entries by citekey for stable git diffs. BBT's export order is not
+# deterministic, so without sorting an identical-content refresh churns
+# ~27k lines.
+entries <- strsplit(sub("^\\s+", "", bib_text), "\n@", fixed = TRUE)[[1]]
+if (length(entries) > 1) {
+  entries[-1] <- paste0("@", entries[-1])
+  keys <- vapply(entries, function(e) {
+    first_line <- strsplit(e, "\n", fixed = TRUE)[[1]][1]
+    sub("^@[^{]+\\{([^,]+),.*$", "\\1", first_line)
+  }, character(1))
+  entries <- entries[order(tolower(keys))]
+  bib_text <- paste(trimws(entries, which = "right"), collapse = "\n\n")
+}
+
 # Write to file
 writeLines(bib_text, out_path)
 
