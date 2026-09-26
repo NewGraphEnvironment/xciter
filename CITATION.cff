@@ -1,0 +1,28 @@
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# ------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "xciter" in publications use:'
+type: software
+license: MIT
+title: 'xciter: Extra functions for dealing with citation keys, inline citations and
+  references.'
+version: 0.0.0.9001
+abstract: Citation related functions used in dynamic reporting - particularily within
+  tables where normal rendering does not work.
+authors:
+- family-names: Irvine
+  given-names: Allan
+  email: al@newgraphenvironment.com
+  orcid: https://orcid.org/0000-0002-3495-2128
+repository-code: https://github.com/NewGraphEnvironment/xciter
+url: https://github.com/NewGraphEnvironment/xciter/
+date-released: '2024-12-12'
+contact:
+- family-names: Irvine
+  given-names: Allan
+  email: al@newgraphenvironment.com
+  orcid: https://orcid.org/0000-0002-3495-2128
+
