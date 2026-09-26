@@ -7,3 +7,4 @@
 ^README\.Rmd$
 ^data-raw$
 ^LICENSE\.md$
+^\.git$
