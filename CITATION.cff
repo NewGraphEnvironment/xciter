@@ -17,6 +17,24 @@ authors:
   given-names: Allan
   email: al@newgraphenvironment.com
   orcid: https://orcid.org/0000-0002-3495-2128
+  affiliation: New Graph Environment Ltd.
+preferred-citation:
+  title: 'xciter: Extra functions for dealing with citation keys, inline citations
+    and references.'
+  authors:
+  - family-names: Irvine
+    given-names: Allan
+    email: al@newgraphenvironment.com
+    orcid: https://orcid.org/0000-0002-3495-2128
+    affiliation: New Graph Environment Ltd.
+  version: 0.0.0.9001
+  date-released: '2024-12-12'
+  url: https://github.com/NewGraphEnvironment/xciter/
+  repository-code: https://github.com/NewGraphEnvironment/xciter
+  license: MIT
+  type: software
+  publisher:
+    name: New Graph Environment Ltd.
 repository-code: https://github.com/NewGraphEnvironment/xciter
 url: https://github.com/NewGraphEnvironment/xciter/
 date-released: '2024-12-12'
@@ -25,4 +43,5 @@ contact:
   given-names: Allan
   email: al@newgraphenvironment.com
   orcid: https://orcid.org/0000-0002-3495-2128
+  affiliation: New Graph Environment Ltd.
 
