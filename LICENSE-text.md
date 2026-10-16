@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2024
-    COPYRIGHT HOLDER: xciter authors
+    COPYRIGHT HOLDER: New Graph Environment Ltd.

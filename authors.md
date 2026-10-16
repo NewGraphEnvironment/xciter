@@ -3,21 +3,27 @@
 ## Authors
 
 - **Allan Irvine**. Author, maintainer.
-  [](https://orcid.org/0000-0002-3495-2128)
+  [](https://orcid.org/0000-0002-3495-2128)  
+  New Graph Environment Ltd.
+
+- **New Graph Environment Ltd.**. Copyright holder, funder.
 
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/NewGraphEnvironment/xciter/blob/main/DESCRIPTION)
+[`inst/CITATION`](https://github.com/NewGraphEnvironment/xciter/blob/main/inst/CITATION)
 
-Irvine A (2026). *xciter: Extra functions for dealing with citation
-keys, inline citations and references.*. R package version 0.0.0.9001,
+Irvine A (2024). *xciter: Extra functions for dealing with citation
+keys, inline citations and references.*. New Graph Environment Ltd. R
+package version 0.0.0.9001,
 <https://github.com/NewGraphEnvironment/xciter/>.
 
     @Manual{,
       title = {xciter: Extra functions for dealing with citation keys, inline citations and references.},
       author = {Allan Irvine},
-      year = {2026},
+      organization = {New Graph Environment Ltd.},
+      year = {2024},
+      version = {0.0.0.9001},
       note = {R package version 0.0.0.9001},
       url = {https://github.com/NewGraphEnvironment/xciter/},
     }
