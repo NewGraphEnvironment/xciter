@@ -14,16 +14,15 @@ Source:
 [`inst/CITATION`](https://github.com/NewGraphEnvironment/xciter/blob/main/inst/CITATION)
 
 Irvine A (2024). *xciter: Extra functions for dealing with citation
-keys, inline citations and references.*. New Graph Environment Ltd. R
-package version 0.0.0.9001,
-<https://github.com/NewGraphEnvironment/xciter/>.
+keys, inline citations and references.*. New Graph Environment Ltd.
+Version 0.0.0.9001, <https://github.com/NewGraphEnvironment/xciter/>.
 
-    @Manual{,
+    @Manual{xciter,
       title = {xciter: Extra functions for dealing with citation keys, inline citations and references.},
       author = {Allan Irvine},
       organization = {New Graph Environment Ltd.},
       year = {2024},
       version = {0.0.0.9001},
-      note = {R package version 0.0.0.9001},
+      note = {Version 0.0.0.9001},
       url = {https://github.com/NewGraphEnvironment/xciter/},
     }
