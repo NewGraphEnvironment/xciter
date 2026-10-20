@@ -8,3 +8,4 @@
 ^data-raw$
 ^LICENSE\.md$
 ^\.git$
+^CITATION\.cff$
