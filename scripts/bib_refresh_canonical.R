@@ -153,6 +153,11 @@ if (length(entries) > 1) {
   bib_text <- paste(trimws(entries, which = "right"), collapse = "\n\n")
 }
 
+# Drop the `file` field: it holds each PDF's path in the exporting machine's
+# Zotero storage, which says nothing about the reference and does not belong
+# in a public package. Same filter rbbt::bbt_write_bib() is given in reports.
+bib_text <- gsub("[[:space:]]+file = [{][^}]*[}],?", "", bib_text)
+
 # Write to file
 writeLines(bib_text, out_path)
 
