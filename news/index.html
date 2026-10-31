@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">xciter</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,11 +33,29 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0" id="xciter-010-2026-10-31">xciter 0.1.0 (2026-10-31)<a class="anchor" aria-label="anchor" href="#xciter-010-2026-10-31"></a></h2>
+<p>First release.</p>
+<ul><li>
+<strong>Citation records for reports.</strong> <code><a href="../reference/xct_cff_refresh.html">xct_cff_refresh()</a></code> refreshes a report’s own <code>CITATION.cff</code> for the version being built: the build date, the version from <code>DESCRIPTION</code>, the report and repository URLs, and a Zenodo DOI from <code>Config/DOI</code> when there is one. Nothing is written unless the result passes <code><a href="https://docs.ropensci.org/cffr/reference/cff_validate.html" class="external-link">cffr::cff_validate()</a></code>. <code><a href="../reference/xct_bib_from_cff.html">xct_bib_from_cff()</a></code> builds a <code>@TechReport</code> entry for each cited report from that report’s public <code>CITATION.cff</code>, keyed by repository name, and stops on a record it cannot read or convert.</li>
+<li>
+<strong><code><a href="../reference/xct_bib_clean.html">xct_keys_guess_match()</a></code></strong> takes a maximum string distance for a match, with new defaults, tests and a working example.</li>
+<li>
+<strong><code>inst/extdata/xct_xref_citations_match.csv</code></strong>: a curated table of hard-to-match citation keys and the keys they resolve to, for reuse across repositories (<a href="https://github.com/NewGraphEnvironment/xciter/issues/2" class="external-link">#2</a>).</li>
+<li>
+<strong>The bundled bibliography</strong>, <code>inst/extdata/NewGraphEnvironment.bib</code>, is refreshed by <code>scripts/bib_refresh_canonical.R</code>, sorted by key, and no longer carries the <code>file</code> field (local attachment paths).</li>
+<li>
+<strong><code>xct_keys_to_xref()</code> is deactivated</strong> (moved to <code>inst/deactivated/</code>), so nothing exported uses RefManageR (<a href="https://github.com/NewGraphEnvironment/xciter/issues/3" class="external-link">#3</a>).</li>
+<li>
+<code>xct_bib_clean()</code> sorts the keys it returns.</li>
+<li>The package is cited through <code>inst/CITATION</code> and <code>CITATION.cff</code>, with New Graph Environment Ltd. as copyright holder and publisher.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9001" id="xciter-0009001-2024-12-12">xciter 0.0.0.9001 (2024-12-12)<a class="anchor" aria-label="anchor" href="#xciter-0009001-2024-12-12"></a></h2>
 <ul><li>replace the last of the ngr occurances with <a href="https://gist.github.com/NewGraphEnvironment/b8ac283abfb9f3664bb0691f69ecbe84" class="external-link uri">https://gist.github.com/NewGraphEnvironment/b8ac283abfb9f3664bb0691f69ecbe84</a>
 </li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
