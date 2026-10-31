@@ -11,7 +11,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/NewGraphEnvironment/xciter/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/NewGraphEnvironment/xciter/blob/v0.1.0/inst/CITATION)
 
 Irvine A (2026). *xciter: Extra functions for dealing with citation
 keys, inline citations and references.*. New Graph Environment Ltd.
