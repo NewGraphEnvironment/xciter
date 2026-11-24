@@ -102,7 +102,7 @@ xct_cff_refresh(
   desc = file.path(d, "DESCRIPTION"),
   today = as.Date("2026-10-31")
 )
-#> /tmp/RtmpPCw4dy/report_18df150246d0/CITATION.cff refreshed: version 0.2.0 dated 2026-10-31 (no DOI)
+#> /tmp/Rtmpifvq6v/report_1b7b48dba2a4/CITATION.cff refreshed: version 0.2.0 dated 2026-10-31 (no DOI)
 cat(readLines(file.path(d, "CITATION.cff")), sep = "\n")
 #> cff-version: 1.2.0
 #> message: If you use this report, please cite it as below.
